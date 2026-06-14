@@ -16,6 +16,14 @@ Shorter version:
 Local-first long-term memory MCP server for AI agents.
 ```
 
+## Setup Caveat To Mention
+
+Use this whenever you share the project, because it prevents the most common setup confusion:
+
+```text
+Semi-Pervault MCP is the memory layer, not the model runtime. Claude Desktop / Codex-style clients still need their own account or API setup. OpenClaw / Hermes-style local runtimes do not need a cloud API on the client side if the local model is already running. Semi-Pervault's own LLM and embedding keys are optional for basic storage, but recommended for enrichment, vector retrieval, persona extraction, and graph context.
+```
+
 ## Suggested Topics
 
 Add these in the repository About panel:
@@ -106,6 +114,8 @@ I built Semi-Pervault MCP: a local-first long-term memory server for AI agents, 
 I just published Semi-Pervault MCP, a local-first memory layer for MCP-compatible AI clients like Claude Desktop and Cursor.
 
 It stores long-term memory in local SQLite, exposes memory tools over MCP, and supports hybrid retrieval, persona extraction, graph context, background reflections, and evidence tracing.
+
+Important setup note: it is the memory layer, not the model runtime. Claude Desktop / Codex-style clients still need their own account or API setup; OpenClaw / Hermes-style local runtimes can run without a cloud API on the client side if the local model is already running.
 
 The main design choice is keeping the MCP process thin: it forwards tool calls to a resident local daemon that owns storage and background work.
 

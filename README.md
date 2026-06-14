@@ -142,6 +142,19 @@ The MCP host intentionally does not open the database or run background loops. T
 
 ## Quick Start
 
+### Important: model/API setup
+
+Semi-Pervault MCP is a memory layer, not a model provider. You still need an AI client or runtime that can call MCP tools.
+
+There are two separate API layers:
+
+| Layer | What you need |
+|---|---|
+| **AI client / model runtime** | Claude Desktop, Codex, and similar cloud-model clients must be configured with their own account or API access before they can use this MCP server. OpenClaw / Hermes-style local runtimes do not need a cloud API for the client side if the local model is already installed and running. |
+| **Semi-Pervault enrichment** | `OPENAI_API_KEY` and embedding keys are optional for basic storage, but needed for LLM enrichment, embeddings, stronger hybrid retrieval, and some background intelligence. Without them, the daemon still stores memories and falls back to non-vector retrieval paths. |
+
+If the MCP client cannot call a model yet, Semi-Pervault will not fix that part. Start your client/runtime first, then connect this memory server.
+
 ### Requirements
 
 - Python 3.11+
@@ -209,6 +222,8 @@ Bridge-specific details live in [`apps/mcp_host/README.md`](apps/mcp_host/README
 ## Configuration
 
 The backend config template is [`backend/.env.example`](backend/.env.example).
+
+For a first local test, you can leave provider keys empty and use the basic memory path. Add LLM and embedding keys when you want enrichment, vector retrieval, persona extraction, graph extraction, and stronger reflections.
 
 | Variable | Description |
 |---|---|
